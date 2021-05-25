@@ -3,15 +3,21 @@ interface UserProps {
   age: number;
 }
 
+type CallBack = () => {};
+
 export class User {
+  events: { [key: string]: CallBack[] } = {};
+
   constructor(private data: UserProps) {}
 
-  public get(propName: string): number | string {
+  get(propName: string): number | string {
     return this.data[propName];
   }
 
-  public set(update: Partial<UserProps>): void {
+  set(update: Partial<UserProps>): void {
     // Object.assign(this.data, update);
     this.data = { ...this.data, ...update };
   }
+
+  on(eventName: string, callback: CallBack): void {}
 }
