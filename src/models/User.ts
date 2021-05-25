@@ -6,7 +6,12 @@ interface UserProps {
 export class User {
   constructor(private data: UserProps) {}
 
-  get(propName: string): number | string {
+  public get(propName: string): number | string {
     return this.data[propName];
+  }
+
+  public set(update: Partial<UserProps>): void {
+    // Object.assign(this.data, update);
+    this.data = { ...this.data, ...update };
   }
 }
