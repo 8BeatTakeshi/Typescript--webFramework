@@ -47,4 +47,22 @@ export class User {
 
     this.set(response.data);
   }
+
+  async save() {
+    const id = this.get('id');
+
+    if (id) {
+      // Update user
+      const response: AxiosResponse = await axios.put(
+        `http://localhost:3000/users/${id}`,
+        this.data
+      );
+    } else {
+      // Create new user in db
+      const response = await axios.post(
+        'http://localhost:3000/users',
+        this.data
+      );
+    }
+  }
 }
