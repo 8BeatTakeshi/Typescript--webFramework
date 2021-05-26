@@ -1,15 +1,17 @@
-import axios, { AxiosResponse } from 'axios';
-
 import { Eventing } from './Eventing';
+import { Sync } from './Sync';
 
-interface UserProps {
+export interface UserProps {
   id?: number;
   name: string;
   age: number;
 }
 
+const rootUrl = 'http://localhost:3000/users';
+
 export class User {
   public events: Eventing = new Eventing();
+  public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl);
 
   constructor(private data: UserProps) {}
 
@@ -20,31 +22,5 @@ export class User {
   set(update: Partial<UserProps>): void {
     // Object.assign(this.data, update);
     this.data = { ...this.data, ...update };
-  }
-
-  async fetch(): Promise<void> {
-    const response: AxiosResponse = await axios.get(
-      `http://localhost:3000/users/${this.get('id')}`
-    );
-
-    this.set(response.data);
-  }
-
-  async save() {
-    const id = this.get('id');
-
-    if (id) {
-      // Update user
-      const response: AxiosResponse = await axios.put(
-        `http://localhost:3000/users/${id}`,
-        this.data
-      );
-    } else {
-      // Create new user in db
-      const response = await axios.post(
-        'http://localhost:3000/users',
-        this.data
-      );
-    }
   }
 }
