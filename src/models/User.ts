@@ -1,15 +1,15 @@
 import axios, { AxiosResponse } from 'axios';
 
+import { Eventing } from './Eventing';
+
 interface UserProps {
   id?: number;
   name: string;
   age: number;
 }
 
-type CallBack = () => void;
-
 export class User {
-  events: { [key: string]: CallBack[] } = {};
+  public events: Eventing = new Eventing();
 
   constructor(private data: UserProps) {}
 
@@ -20,24 +20,6 @@ export class User {
   set(update: Partial<UserProps>): void {
     // Object.assign(this.data, update);
     this.data = { ...this.data, ...update };
-  }
-
-  on(eventName: string, callback: CallBack): void {
-    const handlers = this.events[eventName] || [];
-    handlers.push(callback);
-    this.events[eventName] = handlers;
-  }
-
-  trigger(eventName: string): void {
-    const handlers = this.events[eventName] || [];
-
-    // if (!handlers || handlers.length === 0) {
-    //   return;
-    // }
-
-    handlers.forEach((callback) => {
-      callback();
-    });
   }
 
   async fetch(): Promise<void> {
