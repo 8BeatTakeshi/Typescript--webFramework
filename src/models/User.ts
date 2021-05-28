@@ -19,15 +19,21 @@ export class User {
     this.attributes = new Attributes<UserProps>(attrs);
   }
 
-  get get() {
-    return this.attributes.get;
-  }
-
   get on() {
     return this.events.on;
   }
 
   get trigger() {
     return this.events.trigger;
+  }
+
+  get get() {
+    return this.attributes.get;
+  }
+
+  set(update: Partial<UserProps>): void {
+    this.attributes.set(update);
+
+    this.events.trigger('change');
   }
 }
