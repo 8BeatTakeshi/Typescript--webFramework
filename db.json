@@ -2,13 +2,18 @@
   "users": [
     {
       "id": 1,
-      "name": "Jinx",
-      "age": 19
+      "name": "Maitre Yi",
+      "age": 40
     },
     {
       "name": "Mario",
       "age": 40,
       "id": 2
+    },
+    {
+      "name": "Sonic",
+      "age": 45,
+      "id": 3
     }
   ]
 }
