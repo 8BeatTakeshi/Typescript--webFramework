@@ -43,7 +43,7 @@ export class Model<T extends HasId> {
     return this.attributes.get;
   }
   //shortened for getter
-  // get = this.events.get;
+  // get = this.attributes.get;
 
   set(update: T): void {
     this.attributes.set(update);
