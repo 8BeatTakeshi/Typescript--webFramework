@@ -30,14 +30,20 @@ export class Model<T extends HasId> {
   get on() {
     return this.events.on;
   }
+  //shortened for getter
+  // on = this.events.on;
 
   get trigger() {
     return this.events.trigger;
   }
+  //shortened for getter
+  // trigger = this.events.trigger;
 
   get get() {
     return this.attributes.get;
   }
+  //shortened for getter
+  // get = this.events.get;
 
   set(update: T): void {
     this.attributes.set(update);
