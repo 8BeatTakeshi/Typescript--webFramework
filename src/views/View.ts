@@ -17,6 +17,8 @@ export abstract class View<T extends Model<K>, K> {
     return {};
   }
 
+  onRender(): void {}
+
   bindModel(): void {
     this.model.on('change', () => {
       this.render();
@@ -56,6 +58,8 @@ export abstract class View<T extends Model<K>, K> {
 
     this.bindEvents(templateElement.content);
     this.mapRegions(templateElement.content);
+
+    this.onRender();
 
     this.parent.append(templateElement.content);
   }
